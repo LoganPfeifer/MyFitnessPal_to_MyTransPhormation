@@ -35,8 +35,7 @@ def EnterMeals(mealNum):
 
 
 
-
-
+##### Application Start #####
 
 # Get the correct webdriver (Chrome in our case)
 driver = webdriver.Chrome(executable_path=configuration.CHROMEDRIVER_PATH)
@@ -67,6 +66,7 @@ driver.get(configuration.MFP_URL + "?date=" + date)
 # Wait for specific data to load
 table_data = WebDriverWait(driver, timeout=30).until(lambda d: d.find_elements(By.TAG_NAME, "td"))
 
+# Initialize variables
 Macros = [[0,0,0,0,0], [0,0,0,0,0], [0,0,0,0,0], [0,0,0,0,0]]
 meal = 0
 i = 0
@@ -76,35 +76,11 @@ while i < len(table_data):
 
   if table_data[i].text == "Quick Tools":
     
-    # Calories
-    try:
-      Macros[meal][0] = int(table_data[i+1].text.replace(',',''))
-    except:
-      Macros[meal][0] = int(0)
-
-    # Protein
-    try:
-      Macros[meal][1] = int(table_data[i+2].text.replace(',',''))
-    except:
-      Macros[meal][1] = int(0)
-
-    # Carbs
-    try:
-      Macros[meal][2] = int(table_data[i+3].text.replace(',',''))
-    except:
-      Macros[meal][2] = int(0)
-    
-    # Fats
-    try:
-      Macros[meal][3] = int(table_data[i+4].text.replace(',',''))
-    except:
-      Macros[meal][3] = int(0)
-    
-    # Fiber
-    try:
-      Macros[meal][4] = int(table_data[i+5].text.replace(',',''))
-    except:
-      Macros[meal][4] = int(0)
+    for x in range(Macros[meal]):
+      try:
+        Macros[meal][x] = int(table_data[i+x+1].text.replace(',',''))
+      except:
+        Macros[meal][x] = int(0)
     
     meal = meal + 1
     i = i + 5
