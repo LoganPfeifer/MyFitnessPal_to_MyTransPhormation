@@ -78,31 +78,31 @@ while i < len(table_data):
     
     # Calories
     try:
-      Macros[meal][0] = int(table_data[i+1].text)
+      Macros[meal][0] = int(table_data[i+1].text.replace(',',''))
     except:
       Macros[meal][0] = int(0)
-    
+
     # Protein
     try:
-      Macros[meal][1] = int(table_data[i+2].text)
+      Macros[meal][1] = int(table_data[i+2].text.replace(',',''))
     except:
       Macros[meal][1] = int(0)
 
     # Carbs
     try:
-      Macros[meal][2] = int(table_data[i+3].text)
+      Macros[meal][2] = int(table_data[i+3].text.replace(',',''))
     except:
       Macros[meal][2] = int(0)
     
     # Fats
     try:
-      Macros[meal][3] = int(table_data[i+4].text)
+      Macros[meal][3] = int(table_data[i+4].text.replace(',',''))
     except:
       Macros[meal][3] = int(0)
     
     # Fiber
     try:
-      Macros[meal][4] = int(table_data[i+5].text)
+      Macros[meal][4] = int(table_data[i+5].text.replace(',',''))
     except:
       Macros[meal][4] = int(0)
     
