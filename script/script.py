@@ -73,21 +73,27 @@ meal = 0
 i = 0
 
 # Initialize CSV
-header = ['food', 'serving', 'Protein (g)', 'Carbs (g)', 'Fats (g)', 'Fiber (g)']
-row = ['','','','','','']
+DIRECTORY = 'log/'
+header = ['meal','food', 'serving', 'Protein (g)', 'Carbs (g)', 'Fats (g)', 'Fiber (g)']
+row = ['','','','','','','']
 
-f = open('log/data.csv', 'w')
+f = open(DIRECTORY + date + '.csv', 'a', newline='')
 writer = csv.writer(f)
 
 while i < len(table_data):
-  if table_data[i].text == "Quick Tools":
+  if meal > 3:
+    break
+  elif table_data[i].text == "Quick Tools":
     i = i + 7
+    meal = meal+1
   elif table_data[i].text.isnumeric():
-    row[0] = table_data[i-1].text
-    row[1] = table_data[i  ].text
-    row[2] = table_data[i+1].text
-    row[3] = table_data[i+2].text
-    row[4] = table_data[i+3].text
+    row[0] = int(meal)
+    row[1] = table_data[i-1].text.split(",")[0]
+    row[2] = table_data[i-1].text.split(",")[1]
+    row[3] = table_data[i  ].text
+    row[4] = table_data[i+1].text
+    row[5] = table_data[i+2].text
+    row[6] = table_data[i+3].text
     i = i + 6
     writer.writerow(row)
   else:
@@ -97,11 +103,12 @@ f.close()
 
 # Look through the data for "Quick Tools". The following data will be what we want.
 i = 0
+meal = 0
 while i < len(table_data):
 
   if table_data[i].text == "Quick Tools":
     
-    for x in range(Macros[meal]):
+    for x in range(len(Macros[meal])):
       try:
         Macros[meal][x] = int(table_data[i+x+1].text.replace(',',''))
       except:
@@ -110,6 +117,8 @@ while i < len(table_data):
     meal = meal + 1
     i = i + 5
   else: i = i + 1
+
+print(Macros)
 
 ##### Upload Data to MyTransPhormation #####
 
