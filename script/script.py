@@ -32,7 +32,7 @@ def EnterMeals(mealNum):
   inputs[1].send_keys(Macros[mealNum][0])
 
   buttons = driver.find_elements(By.TAG_NAME, "ion-button")
-  buttons[14].click()
+  buttons[10].click()
 
 
 
@@ -73,33 +73,36 @@ meal = 0
 i = 0
 
 # Initialize CSV
-DIRECTORY = 'log/'
-header = ['meal','food', 'serving', 'Protein (g)', 'Carbs (g)', 'Fats (g)', 'Fiber (g)']
-row = ['','','','','','','']
+try:
+  DIRECTORY = 'log/'
+  header = ['meal','food', 'serving', 'Protein (g)', 'Carbs (g)', 'Fats (g)', 'Fiber (g)']
+  row = ['','','','','','','']
 
-f = open(DIRECTORY + date + '.csv', 'a', newline='')
-writer = csv.writer(f)
+  f = open(DIRECTORY + date + '.csv', 'a', newline='')
+  writer = csv.writer(f)
 
-while i < len(table_data):
-  if meal > 3:
-    break
-  elif table_data[i].text == "Quick Tools":
-    i = i + 7
-    meal = meal+1
-  elif table_data[i].text.isnumeric():
-    row[0] = int(meal)
-    row[1] = table_data[i-1].text.split(",")[0]
-    row[2] = table_data[i-1].text.split(",")[1]
-    row[3] = table_data[i  ].text
-    row[4] = table_data[i+1].text
-    row[5] = table_data[i+2].text
-    row[6] = table_data[i+3].text
-    i = i + 6
-    writer.writerow(row)
-  else:
-    i = i + 1
+  while i < len(table_data):
+    if meal > 3:
+      break
+    elif table_data[i].text == "Quick Tools":
+      i = i + 7
+      meal = meal+1
+    elif table_data[i].text.isnumeric():
+      row[0] = int(meal)
+      row[1] = table_data[i-1].text.split(",")[0]
+      row[2] = table_data[i-1].text.split(",")[1]
+      row[3] = table_data[i  ].text
+      row[4] = table_data[i+1].text
+      row[5] = table_data[i+2].text
+      row[6] = table_data[i+3].text
+      i = i + 6
+      writer.writerow(row)
+    else:
+      i = i + 1
 
-f.close()
+  f.close()
+except:
+  print("Could not write CSV")
 
 # Look through the data for "Quick Tools". The following data will be what we want.
 i = 0
