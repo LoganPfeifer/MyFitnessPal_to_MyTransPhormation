@@ -11,12 +11,16 @@ Python script that will scrape nutrition data from MyFitnessPal and upload it to
 ## Configure MyFitnessPal
 1. Visit [MyFitnessPal](https://www.myfitnesspal.com/)
 2. Select settings
+
 ![settings](docs/Instructions_1.png)
 3. Configure the "Nutrients Tracked:" sections as follows:
+
 ![Nutrients Tracked](docs/Instructions_2.png)
 4. Set your "Diary Sharing:" to "Locked with a key:" and set your key to your choice. 
+
 ![Locked](docs/Instructions_3.png)
 5. Make note of your diary link (including the text behind the black box)
+
 ![Diary Link](docs/Instructions_4.png)
 
 ## Setup Your Configuration File
