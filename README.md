@@ -50,4 +50,4 @@ Whenever you run this script, it will collect information for the previous day o
    - A log file will be generated that contains the information collected from [MyFitnessPal](https://www.myfitnesspal.com/)
 
 ## Schedule to Run Daily
-I'm lazy so follow this link to create a task in Windows Task Scheduler
+I'm lazy so follow [this link](https://www.thewindowsclub.com/how-to-schedule-batch-file-run-automatically-windows-7) to create a task in Windows Task Scheduler
